@@ -1,30 +1,33 @@
 <template>
-	<div class="container">
-		<logo-layout></logo-layout>
-		<!-- <header-layout @changePassword='changePwd' @callback="callback" @hideHeader="hideHeader" :isShow="isShow"></header-layout> -->
-		<content-layout></content-layout>
-		<footer-layout></footer-layout>
+	<div class="container" style="width:100%;height:100%">
+		<el-container>
+			<el-header><head-layout></head-layout></el-header>
+			<el-container>
+				<el-aside width="200px"><side-layout></side-layout></el-aside>
+				<el-main><content-layout></content-layout></el-main>
+			</el-container>			
+		</el-container>
 	</div>
 </template>
 <script>
-	import LogoLayout from '@/components/layout/logo';
-	import FooterLayout from '@/components/layout/footer';
-	import ContentLayout from '@/components/layout/content';
+	import HeadLayout from './components/layout/head.vue';
+	import SideLayout from './components/layout/side.vue';
+	import ContentLayout from './components/layout/content.vue';
+
 	export default {
 		name: 'app',
 		data() {
 			return{
-
+				message: 'yangjian'
 			}
 		},
 		components: {
-			LogoLayout,
-			FooterLayout,
+			HeadLayout,
+			SideLayout,
 			ContentLayout,
 		},
 		methods: {
-		},
-		created() {}
+		}
 	}
 </script>
 <style>

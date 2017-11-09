@@ -1,9 +1,10 @@
 <template>
-	<div>head</div>
+	<div>sidebar</div>
 </template>
+
 <script>
 	export default {
-		name: 'head',
+		name: 'side',
 		data() {
 			return{
 				message: 'yangjian'
@@ -13,7 +14,7 @@
 		},
 		methods: {
 		}
-	}		
+	}	
 </script>
 
 <style>
