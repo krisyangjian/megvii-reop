@@ -1,12 +1,13 @@
 <template>
-	<div>head</div>
+	<div>
+	</div>
 </template>
 <script>
 	export default {
 		name: 'head',
 		data() {
 			return{
-				message: 'yangjian'
+				
 			}
 		},
 		components: {
@@ -17,5 +18,4 @@
 </script>
 
 <style>
-	
 </style>

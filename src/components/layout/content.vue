@@ -1,5 +1,5 @@
 <template>
-	<div>content</div>
+	<div class="content">content</div>
 </template>
 <script>
 	export default {
@@ -17,5 +17,9 @@
 </script>
 
 <style>
-	
+	.content {
+		width: 100%;
+		height: 100%;
+		border: 1px solid #c7c7ca
+	}
 </style>
