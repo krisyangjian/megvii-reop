@@ -1,17 +1,17 @@
 <template>
 	<div class="content">
-		<div>
+		<div style="height:20px;">
       <span>当前位置：</span>
 			<el-breadcrumb separator-class="el-icon-arrow-right">
   				<el-breadcrumb-item :to="{ path: '/' }">人像检索</el-breadcrumb-item>
   				<el-breadcrumb-item>选项1</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
-		<div style="float:right;margin-bottom:33px;display: none;">
+		<div style="float: right; margin-top: 20px;">
 			<el-button type="primary" icon="el-icon-upload" @click="dialogVisible = true">新建底库</el-button>
 		</div>
     <div class="search">
-      <div style="">
+      <div style="text-align:right;">
         <el-button type="primary">查询</el-button>
       </div>
       <div class="search-form">
@@ -43,7 +43,7 @@
           </el-form>
       </div>
     </div>
-		<div class="lib-data-table">  
+	<div class="lib-data-table">  
 			<el-table
     			:data="tableData"
     			stripe
@@ -63,7 +63,6 @@
       				label="地址">
     			</el-table-column>
           <el-table-column
-            fixed="right"
             label="操作"
             width="100">
             <template slot-scope="scope">
@@ -79,9 +78,7 @@
             </template>
           </el-table-column>
   			</el-table>
-  		</div>
-
-    <div class="lib-pagination" style="display: none;">
+  		<div class="lib-pagination">
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -92,6 +89,9 @@
         :total="1000"
         ></el-pagination>
     </div>
+  	</div>
+
+
     <div class="newLibDialog">
 		  <el-dialog
   			title="新建底库"
@@ -203,9 +203,25 @@
           			name: '王小虎',
           			address: '上海市普陀区金沙江路 1519 弄'
         		}, {
-          			date: '2016-05-03',
+          			date: '2016-05-01',
           			name: '王小虎',
-          			address: '上海市普陀区金沙江路 1516 弄'
+          			address: '上海市普陀区金沙江路 1519 弄'
+        		}, {
+          			date: '2016-05-01',
+          			name: '王小虎',
+          			address: '上海市普陀区金沙江路 1519 弄'
+        		}, {
+          			date: '2016-05-01',
+          			name: '王小虎',
+          			address: '上海市普陀区金沙江路 1519 弄'
+        		}, {
+          			date: '2016-05-01',
+          			name: '王小虎',
+          			address: '上海市普陀区金沙江路 1519 弄'
+        		}, {
+          			date: '2016-05-01',
+          			name: '王小虎',
+          			address: '上海市普陀区金沙江路 1519 弄'
         		}],
         dialogVisible: false,
         dialogUploadVisible: false,
@@ -276,15 +292,27 @@
   .content .search {
     /*width: 400px;*/
     float: left;
+    height: calc(100% - 50px);
+    margin-top: 30px;
+    margin-right: 20px;
   }
   .content .lib-data-table {
-    margin-left: 342px;
+  	position: relative;
+    overflow: hidden;
+    margin-top: 90px;
+    height: calc(100% - 110px);
   }
   .content .lib-data-table .el-table {
     border: 1px solid #c7c7ca;
+    height: 100%;
+    background-color: #ffffff;
   }
   .content .search .search-form {
+  	margin-top: 20px;
     padding: 40px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 142px);
     background-color: #ffffff;
     border: 1px solid #c7c7ca;
   }
@@ -314,6 +342,12 @@
   .lib-data-table .el-dropdown-link {
     cursor: pointer;
     color: #409EFF;
+  }
+  .lib-data-table .el-table__body-wrapper {
+  	height: calc(100% - 100px)
+  }
+  .lib-data-table .el-table__header-wrapper {
+  	height: 48px;
   }
   .uploadDialog .el-upload-dragger {
     width: 280px;
