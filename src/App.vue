@@ -45,7 +45,8 @@
 		overflow-x: hidden;
 	}
 	.container-wrap .main-wrap {
-		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: auto;
 		background-color: #eaecf1
 	}
 </style>
