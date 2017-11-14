@@ -43,8 +43,8 @@
 		},
 		methods: {
       collapseClick() {
-        this.isClose = !this.isClose;
-        // this.isCollapse = !this.isCollapse;
+        // this.isClose = !this.isClose;
+        this.isCollapse = !this.isCollapse;
       }
 		}
 	}	
@@ -76,7 +76,7 @@
 		border-right: none;
 	}
 	.menu-megvii .el-submenu .el-menu-item {
-		min-width: 170px;
+		/*min-width: 170px;*/
 	}
   .menu-megvii .el-submenu__title i {
     color: #fff;

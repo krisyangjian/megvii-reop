@@ -3,7 +3,7 @@
 		<el-container class="container-wrap">
 			<el-header class="header-wrap" height="50px"><head-layout></head-layout></el-header>
 			<el-container class="container-wrap">
-				<el-aside class="side-wrap" width="170px"><side-layout></side-layout></el-aside>
+				<el-aside class="side-wrap"><side-layout></side-layout></el-aside>
 				<el-main class="main-wrap"><content-layout></content-layout></el-main>
 			</el-container>			
 		</el-container>
