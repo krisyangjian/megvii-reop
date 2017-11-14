@@ -8,7 +8,7 @@
 			</el-breadcrumb>
 		</div>
 		<div style="float: right; margin-top: 20px;">
-			<el-button type="primary" icon="el-icon-upload" @click="dialogVisible = true">新建底库</el-button>
+			<el-button type="primary" icon="el-icon-upload" @click="dialogVisible=true">新建底库</el-button>
 		</div>
     <div class="search">
       <div style="text-align:right;">
@@ -149,10 +149,7 @@
           <div v-show="radio == 2">
             <div>
               <span>共享人员：</span>
-              <div>
-                <el-select v-model="value" placeholder="请选择">
-                </el-select>
-              </div>
+              <div class="share-people" @click="select0Visible = true"><i class="el-icon-caret-bottom"></i></div>
             </div>
           </div>
   			</slot>
@@ -160,6 +157,32 @@
     			<el-button type="primary" @click="dialogVisible = false">完  成</el-button>
   			</span>
 		  </el-dialog>
+    </div>
+    <div class="selectDialog0">
+      <el-dialog
+        :fullscreen="true"
+        :modal="false"
+        :visible.sync="select0Visible">
+        <slot title="title"><div class="select-title" @click="select0Visible=false"><i class="el-icon-arrow-left"></i><span>选择共享人员</span></div></slot>
+        <slot>
+          <div class="select-area">
+            <div class="select-cater"><el-checkbox v-model="allChecked">全部人员共享</el-checkbox></div>
+            <div class="select-cater" v-bind:class="{ noselect: allChecked }" @click="selectTree=true">指定部门共享</div>
+            <div class="select-cater" v-bind:class="{ noselect: allChecked }" @click="selectTree=true">指定人员共享</div>
+          </div>
+          <div class="select-tree" v-show="selectTree">
+            <el-tree
+              :data="dataTree"
+              node-key="id"
+              show-checkbox
+              @check-change="handleCheckChange">
+          </el-tree>
+          </div>
+        </slot>
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="startUpload">确定</el-button>
+        </span>
+      </el-dialog>
     </div>
     <div class="uploadDialog">
       <el-dialog
@@ -182,6 +205,23 @@
           <el-button type="default" @click="dialogUploadVisible = false">取消</el-button>
         </span>
       </el-dialog>
+    </div>
+    <div class="uploadingDialog">
+      <el-dialog
+        :modal="false"
+        :visible.sync="uploadingVisible">
+        <div slot="title" class="uploading-title">正在上传1项内容<i class="el-icon-arrow-down" @click="normalLayer=!normalLayer"></i></div>
+        <slot>
+          <div v-show="normalLayer">
+            <div class="remain-time">
+              <div class="remain-time-text">还剩下1小时29分</div>
+            </div>
+            <div class="remain-status">
+              <div class="remain-item">上传图片0</div>
+            </div>
+          </div>
+        </slot>
+      </el-dialog>      
     </div>
   </div>
 </template>
@@ -225,6 +265,9 @@
         		}],
         dialogVisible: false,
         dialogUploadVisible: false,
+        select0Visible: false,
+        uploadingVisible: false,
+        normalLayer: true,
         radio: 1,
         options: [{
           value: '选项1',
@@ -243,14 +286,37 @@
         currentPage4: 4,
         form: {
           name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        }			
+          year: '',
+          status: '',
+          type: ''
+        },
+        allChecked: false,
+        selectTree: false,
+        dataTree: [{
+          id: 1,
+          label: '一级 2',
+          children: [{
+            id: 3,
+            label: '二级 2-1',
+            children: [{
+              id: 4,
+              label: '三级 3-1-1'
+            }, {
+              id: 5,
+              label: '三级 3-1-2'
+            }]
+          }, {
+            id: 2,
+            label: '二级 2-2',
+            children: [{
+              id: 6,
+              label: '三级 3-2-1'
+            }, {
+              id: 7,
+              label: '三级 3-2-2'
+            }]
+          }]
+        }]
 			}
 		},
 		components: {
@@ -270,6 +336,7 @@
       startUpload() {
         this.$refs.upload.submit();
         this.dialogUploadVisible = false;
+        this.uploadingVisible = true;
       },
       handleLibTypeChange(model) {
       },
@@ -277,6 +344,9 @@
       handleCurrentChange(model) {
         console.log(model)
       },
+      handleCheckChange() {
+
+      }
 		}
 	}		
 </script>
@@ -290,7 +360,7 @@
     display: inline-block;
   }
   .content .search {
-    /*width: 400px;*/
+    width: 330px;
     float: left;
     height: calc(100% - 50px);
     margin-top: 30px;
@@ -316,11 +386,18 @@
     background-color: #ffffff;
     border: 1px solid #c7c7ca;
   }
-	.newLibDialog {
+	.newLibDialog, .selectDialog0 {
 		position: relative;
 	}
-  .newLibDialog .el-dialog {
+  .newLibDialog .el-dialog, .selectDialog0 .el-dialog{
     float: right;
+  }
+  .selectDialog0 .el-dialog__wrapper .el-dialog.is-fullscreen {
+    width: fit-content;
+  }
+  .selectDialog0 .el-dialog__wrapper .el-dialog__body {
+    /*width: 320px;*/
+    overflow: hidden;
   }
 	.newLibDialog .dialog-footer {
 		position: absolute;
@@ -349,6 +426,49 @@
   .lib-data-table .el-table__header-wrapper {
   	height: 48px;
   }
+  .share-people {
+    height: 38px;
+    border: 1px solid #d8dce5;
+    cursor: pointer;
+    text-align: right;
+  }
+  .select-area {
+    border: 1px solid #c7c7ca;
+    border-bottom: none;
+    float: left;
+    width: 318px;
+  }
+  .select-area .el-dialog__footer {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+  .select-title {
+    font-size: 16px;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    cursor: pointer;
+  }
+  .select-area .select-cater{
+    padding: 0px 10px;
+    height: 85px;
+    line-height: 100px;
+    border-bottom: 1px solid #c7c7ca;
+    cursor: pointer;
+  }
+  .select-tree {
+    background-color:#eaeaea;
+    width:322px;
+    height:400px;
+    float:right;
+  }
+  .select-tree .el-tree {
+    background-color: #eaeaea;
+  }
+  .select-area .select-cater.noselect {
+    background-color: #cbd4d1;
+  }
   .uploadDialog .el-upload-dragger {
     width: 280px;
   }
@@ -360,14 +480,66 @@
     left: 310px;
     top: 20px;
   }
+  .uploadDialog .el-dialog {
+    min-width: 550px;
+  }
   .uploadDialog .el-upload-list .el-upload-list__item-name {
     /*margin-right: 0px;*/
   }
   .newLibDialog .dialog-fade-enter-active {
     animation: new-dialog-fade-in .2s;
   }
-  .newLibDialog .dialog-fade-leave-active {
+  .newLibDialog .dialog-fade-leave-active{
     animation: new-dialog-fade-out .2s;
+  }
+  .selectDialog0 .dialog-fade-enter-active {
+    animation: select-dialog-fade-in .2s;
+  }
+  .selectDialog0 .dialog-fade-leave-active {
+    animation: select-dialog-fade-out .2s;
+  }
+  .uploadingDialog .uploading-title {
+    font-size: 14px;
+    color: #ffffff;
+  }
+  .uploadingDialog .el-dialog__header{
+    background-color: black;
+  }
+  .uploadingDialog .el-dialog {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    width: 350px;
+    margin: 0;
+  }
+  .uploadingDialog .el-icon-arrow-down {
+    float: right;
+    margin-right: 50px;
+    /*margin-top: 2px;*/
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .uploadingDialog .remain-time {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    background-color: #eaeaea;
+  }
+  .uploadingDialog .remain-time-text {
+    font-size: 13px;
+  }
+  .uploadingDialog .el-dialog__body {
+    padding: 0;
+  }
+  .uploadingDialog .remain-status {
+    background-color: #ffffff;
+    padding: 0 10px;
+  }
+  .uploadingDialog .remain-status .remain-item {
+    height: 50px;
+    line-height: 50px;
+    font-size: 12px;
+    color: #a3a5aa;
   }
   @keyframes new-dialog-fade-in {
     0% {
@@ -380,13 +552,33 @@
     }
   }
   @keyframes new-dialog-fade-out {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(450px, 0, 0);
+      opacity: 0;
+    }
   }
-  100% {
-    transform: translate3d(450px, 0, 0);
-    opacity: 0;
+  @keyframes select-dialog-fade-in {
+    0% {
+      transform: translate3d(450px, 0, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
   }
-}
+  @keyframes select-dialog-fade-out {
+    0% {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(450px, 0, 0);
+      opacity: 0;
+    }
+  }
 </style>

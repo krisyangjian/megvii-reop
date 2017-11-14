@@ -16,12 +16,12 @@
           :collapse="isCollapse"
           >
       			<el-submenu index="1">
-        			<template slot="title"><i class="el-icon-caret-bottom"></i><span>人像检索</span></template>
+        			<template slot="title"><i class="el-icon-location"></i><span>人像检索</span></template>
         			<el-menu-item index="1-1">选项1</el-menu-item>
         			<el-menu-item index="1-2">选项2</el-menu-item>
       			</el-submenu>
       			<el-submenu index="2">
-        			<template slot="title"><i class="el-icon-caret-bottom"></i><span>资源管理</span></template>
+        			<template slot="title"><i class="el-icon-menu"></i><span>资源管理</span></template>
           		<el-menu-item index="2-1">选项1</el-menu-item>
           		<el-menu-item index="2-2">选项2</el-menu-item>oup>
       			</el-submenu>
@@ -82,6 +82,6 @@
     color: #fff;
   }
   .menu-megvii .el-submenu__title .el-submenu__icon-arrow {
-    display: none;
+    /*display: none;*/
   }
 </style>
