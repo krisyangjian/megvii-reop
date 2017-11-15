@@ -11,7 +11,7 @@
       }">
     		<el-menu
           class="menu-megvii"
-          background-color="transparent"
+          background-color="#5d6674"
           text-color="#fff"
           :collapse="isCollapse"
           >
@@ -23,7 +23,7 @@
       			<el-submenu index="2">
         			<template slot="title"><i class="el-icon-menu"></i><span>资源管理</span></template>
           		<el-menu-item index="2-1">选项1</el-menu-item>
-          		<el-menu-item index="2-2">选项2</el-menu-item>oup>
+          		<el-menu-item index="2-2">选项2</el-menu-item>
       			</el-submenu>
     		</el-menu>
 		</div>
@@ -51,12 +51,22 @@
 </script>
 
 <style>
+  .sidebar {
+    float: left;
+    height: 100%;
+    background-color: #5d6674;
+  }
   .sidebar .menu-wrap{
-    /*-webkit-transition: all .3s;*/
+    background-color: #5d6674;
     overflow: hidden;
   }
+  .sidebar .menu-megvii:not(.el-menu--collapse) {
+    width: 200px;
+  }
+  .sidebar .menu-wrap .el-menu {
+    background-color: #292c36;
+  }
   .sidebar .menu-wrap.close {
-    /*-webkit-transition: all .3s;*/ 
     height: 0px;
   }
   .sidebar .collapse-btn {
@@ -66,22 +76,16 @@
     text-align: center;
     background-color: #424d5a;
     cursor: pointer;
-    /*display: none;*/
+    text-align: center;
   }
   .sidebar .collapse-btn i {
     color: #fff;
-    margin-left: -9px;
+    /*margin-left: -9px;*/
   }
 	.menu-megvii.el-menu {
 		border-right: none;
 	}
-	.menu-megvii .el-submenu .el-menu-item {
-		/*min-width: 170px;*/
-	}
   .menu-megvii .el-submenu__title i {
     color: #fff;
-  }
-  .menu-megvii .el-submenu__title .el-submenu__icon-arrow {
-    /*display: none;*/
   }
 </style>

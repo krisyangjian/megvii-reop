@@ -353,8 +353,9 @@
 
 <style>
 	.content {
-		width: 100%;
-		height: 100%;
+		height: calc(100% - 40px);
+    padding: 20px;
+    flex: 1;
 	}
   .content .el-breadcrumb {
     display: inline-block;

@@ -1,12 +1,12 @@
 <template>
-	<div class="container" style="width:100%;height:100%">
-		<el-container class="container-wrap">
-			<el-header class="header-wrap" height="50px"><head-layout></head-layout></el-header>
-			<el-container class="container-wrap">
-				<el-aside class="side-wrap"><side-layout></side-layout></el-aside>
-				<el-main class="main-wrap"><content-layout></content-layout></el-main>
-			</el-container>			
-		</el-container>
+	<div class="container">
+		<div class="head-wrap">
+			<head-layout></head-layout>
+		</div>
+		<div class="content-wrap">
+			<side-layout></side-layout>
+			<content-layout></content-layout>
+		</div>
 	</div>
 </template>
 <script>
@@ -18,7 +18,6 @@
 		name: 'app',
 		data() {
 			return{
-				message: 'yangjian'
 			}
 		},
 		components: {
@@ -31,22 +30,17 @@
 	}
 </script>
 <style>
-	.header-wrap {
-		background-color: #5d6674;
+	.container {
+		width:100%;
+		height:100%
 	}
-	.side-wrap {
-		background-color: #292c36;
+	.head-wrap {
+		height: 50px;
+		background-color: $--background-color-head;
 	}
-	.container-wrap {
-		height: 100%;
-		flex: 1;
-	}
-	.container .el-aside {
-		overflow-x: hidden;
-	}
-	.container-wrap .main-wrap {
-		overflow-x: hidden;
-		overflow-y: auto;
-		background-color: #eaecf1
+	.content-wrap {
+		display: flex;
+		height: calc(100% - 50px);
+		overflow: hidden;
 	}
 </style>
